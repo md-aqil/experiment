@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="scene">
+	  <div class="layer" data-depth="3.00"><img src="img/layer1.png"></div>
+	  <div class="layer" data-depth="0.20"><img src="img/layer2.png"></div>
+	  <div class="layer" data-depth="0.40"><img src="img/layer3.png"></div>
+	  <div class="layer" data-depth="0.60"><img src="img/layer4.png"></div>
+	  <div class="layer" data-depth="0.80"><img src="img/layer5.png"></div>
+	  <div class="layer" data-depth="1.00"><img src="img/layer6.png"></div>
+	</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/parallax.min.js"></script>
+	<script>
+		var scene = document.getElementById('scene');
+	
+	var parallax = new Parallax(scene)
+	</script>
+</body>
+</html>

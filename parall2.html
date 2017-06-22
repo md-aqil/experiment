@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="scene">
+	  <div class="layer" data-depth="0.10"><img src="img/c1.png"></div>
+	  <div class="layer" data-depth="0.20"><img src="img/c2.png"></div>
+	  <div class="layer" data-depth="0.40"><img src="img/c3.png"></div>
+	  
+	</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/parallax.min.js"></script>
+	<script>
+		var scene = document.getElementById('scene');
+	
+	var parallax = new Parallax(scene)
+	</script>
+</body>
+</html>
