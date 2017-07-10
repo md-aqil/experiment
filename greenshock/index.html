@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		.box  {
+			width: 200px;
+			height: 200px;
+			background: red;
+		}
+		.box2 {
+			background: teal;
+		}
+		.box3 {
+			background: lightblue;
+		}
+	</style>
+</head>
+<body>
+
+<div class="box box1">hell</div>
+<div class="box box2"></div>
+<div class="box box3"></div>
+	
+
+<script src="jquery.min.js"></script>
+<script src="TweenMax.min.js"></script>
+
+
+<script>
+	var tl = new TimelineMax({ repeat: -1 });
+	var duration = 1;
+$( ".box" ).each(function() {
+  tl.to(this , duration, {x:500,})
+	  .to(this , duration, {rotation:90, scale:.5,  opacity:0, delay:3})
+	  
+});
+
+
+	
+</script>
+</body>
+</html>
