@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	 <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	body {
+		background: #f7f7f7;
+	}
+	.blur-box {
+		-webkit-filter: url("#goo");
+          filter: url("#goo");
+	}
+	.btn-box  {
+		position: absolute;
+		top: 300px;
+	}
+	.box {
+	  width: 100px;
+	  height: 100px;
+	  position: absolute;
+	  border-radius: 5px;
+	 background: gray;
+
+} 
+.blur-box .box:nth-child(1) {
+	background:rgba(255, 0, 0, .8);
+
+}
+.blur-box .box:nth-child(2) {
+	background:rgba(212, 42, 198, 0.74);	
+}
+.blur-box .box:nth-child(3) {
+	background:rgba(48, 255, 179, 0.8);
+}
+.blur-box .box:nth-child(4) {
+	background:rgba(255, 165, 0, .8);
+}
+.blur-box .box:nth-child(5) {
+	background:rgba(0, 220, 255, 0.7);
+}
+.blur-box .box:nth-child(6) {
+	background:rgba(127, 0, 55, 0.796078431372549);
+}
+.blur-box .box:nth-child(7) {
+	background:rgba(255, 18, 0, 0.796078431372549);
+}
+.blur-box .box:nth-child(8) {
+	background:rgba(249, 240, 5, 0.8784313725490196);
+}
+.blur-box .box:nth-child(9) {
+	background:rgba(74, 0, 129, 0.8);
+}
+.blur-box .box:nth-child(10) {
+	background:rgba(255, 0, 129, 0.8);
+}
+	</style>
+</head>
+<body>
+<div class="blur-box">
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+	<div class="box"></div>
+</div>
+
+<div class="btn-box">
+	<button class="btn">play</button>
+<button onclick="restart()">restart</button>
+<button onclick="stop()">stop</button>
+
+
+</div>
+
+
+
+<svg>
+  <defs>
+    <filter id="goo" style="visibility: hidden">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"></feGaussianBlur>
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"></feColorMatrix>
+      <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
+    </filter>
+  </defs>
+</svg>
+
+<script src="jquery.min.js"></script>
+<script src="TweenMax.min.js"></script>
+<script src="main.js"></script>
+<script>
+	
+var tl = new TimelineMax(),
+ 	 boxes = $('.box');
+
+	tl
+	.staggerTo(boxes, 2, {right: 5,ease: Power2.easeInOut}, 1.5)
+	.staggerTo(boxes, 2, {bottom: 0, ease: Power3.easeInOut}, 0.5)
+	
+ 	tl.pause();
+	$(".btn").click(function(e) {
+		tl.play();
+	});
+
+	function restart(argument) {
+		tl.restart();
+	}
+	function stop(argument) {
+		tl.stop();
+	}
+
+
+</script>
+</body>
+</html>
