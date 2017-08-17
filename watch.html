@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+
+		.s3-watch{
+		 width:140px;
+		  height:140px;
+		}
+
+	.watch-wrapper {
+		
+		  border: solid 2px black;
+		  position:absolute;
+		  top:0;
+		  right:0;
+		  bottom:0;
+		  left:0;
+		  width:140px;
+		  height:140px;
+		  margin:auto;
+		  background:white;
+		  border-radius: 100%;
+		  padding: 8px;
+		  
+		    box-shadow: 0 0 0 10px #dec05f;
+                
+	}
+
+		.watch-wrapper:before {
+		    border: 2px solid #000;
+		    content: '';
+		    position: absolute;
+		    top: -12px;
+		    right: -12px;
+		    bottom: -12px;
+		    left: -12px;
+		    border-radius: 100%;
+		}
+	</style>
+</head>
+<body>
+<div class="watch-wrapper">
+<canvas class="s3-watch" height="300" width="300" id="s3-watch"></canvas>
+	
+</div>
+
+<script>
+	var canvas = document.getElementById('s3-watch');
+var ctx = canvas.getContext('2d');
+clock();
+
+function clock() {
+    var date = new Date();
+    var hour = date.getHours();
+    var min = date.getMinutes();
+    var sec = date.getSeconds();
+    
+    ctx.clearRect(0, 0, 300, 300);
+    ctx.save();
+    ctx.translate(150, 150);
+    ctx.strokeStyle = '#000'; // numbers
+    var pitch = Math.PI * 2 / 12;
+    for (var i = 0; i < 12; i++) {
+        ctx.beginPath();
+        ctx.lineWidth = 4;
+        ctx.moveTo(0, -135);
+        ctx.lineTo(0, -140);
+        ctx.stroke();
+        ctx.rotate(pitch);
+    }
+    ctx.restore();
+    
+    var hourHand = (Math.PI * 2) / 12 * hour + (Math.PI * 2) / 12 * (min / 60);
+    var minHand = (Math.PI * 2) / 60 * min;
+    var secHand = (Math.PI * 2) / 60 * sec;
+    
+    clockHand(hourHand, 80, 6, '#333'); // for hour stroke
+    clockHand(minHand, 120, 4, '#333'); // for minute stroke
+    clockHand(secHand, 130, 2, '#e00'); // for second stroke
+    
+    setTimeout(clock, 1000);
+}
+
+function clockHand(rotation, length, width, color) {
+    ctx.save();
+    ctx.lineWidth = width;
+    ctx.strokeStyle = color;
+    ctx.translate(150, 150);
+    ctx.rotate(rotation);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, -length);
+    ctx.stroke();
+    ctx.restore();
+}
+</script>
+</body>
+</html>
