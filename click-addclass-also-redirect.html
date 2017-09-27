@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script>
+	$(document).ready(function () {
+	    var url = window.location;
+
+	       // Will only work if string in href matches with location
+	       
+	       $('#navlist li.active').removeClass('active');
+	           $('#navlist a[href="' + url + '"]').parent().addClass('active');
+
+
+	       // Will also work for relative and absolute hrefs
+	           $('#navlist a').filter(function () {
+	               return this.href == url;
+	           }).parent().addClass('active').parent().parent().addClass('active');
+	});
+</script>
+</body>
+</html>

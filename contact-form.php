@@ -7,8 +7,9 @@
 
 <div class="contact-form-area">
 <?php
-        $action=$_REQUEST['action'];
-        if ($action=="")    /* display the contact form */
+$action = ( array_key_exists( 'action', $_REQUEST) ? $_REQUEST['action'] : "" );
+      
+        if ($action=="") 
             {
             ?>
             <form  action="" method="POST" enctype="multipart/form-data">
