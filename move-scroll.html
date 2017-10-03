@@ -2,15 +2,48 @@
 <html>
 <head>
 	<title></title>
+	<style>
+		.container {
+			width: 1200px;
+			margin: 0 auto;
+		}
+	</style>
 </head>
-<body>
 	
+	
+<body>
+	<div class="container">
+		<a href="#one" class="page">home</a>
+		<a href="">about</a>
+		<a href="">contact</a>
 
+		<section>
+		<h1 style="font-size: 200px;">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, corrupti, illum. Culpa eligendi necessitatibus nobis consequatur hic eaque laborum laudantium tempora, doloremque natus iusto adipisci explicabo asperiores molestias, deleniti voluptatem.
+		</h1>
+	</section>
+	<div id="one" style="color:red">One</div>
+<section>
+		<h1 style="font-size: 200px;">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, corrupti, illum. Culpa eligendi necessitatibus nobis consequatur hic eaque laborum laudantium tempora, doloremque natus iusto adipisci explicabo asperiores molestias, deleniti voluptatem.
+		</h1>
+	</section>
+<section>
+		<h1 style="font-size: 200px;">
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, corrupti, illum. Culpa eligendi necessitatibus nobis consequatur hic eaque laborum laudantium tempora, doloremque natus iusto adipisci explicabo asperiores molestias, deleniti voluptatem.
+		</h1>
+	</section>
+
+	</div>
+
+	<script src="js/jquery.min.js"></script>
+	
 	<script>
-		$('a').click(function(){
+
+		$('a.page').click(function(){
     $('html, body').animate({
         scrollTop: $( $(this).attr('href') ).offset().top
-    }, 500);
+    }, 2000);
     return false;
 });
 	</script>
