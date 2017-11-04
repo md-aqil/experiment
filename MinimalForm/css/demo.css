@@ -1,0 +1,80 @@
+
+*, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
+body {
+	background: #F2F3EB;
+	
+}
+
+.related a img {
+	max-width: 100%;
+	opacity: 0.4;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+.related a:hover img,
+.related a:active img {
+	opacity: 1;
+}
+
+.related a h3 {
+	margin: 0;
+	padding: 0.5em 0 0.3em;
+	max-width: 300px;
+	font-weight: 400;
+	font-size: 0.75em;
+	text-align: left;
+}
+
+@media screen and (max-width: 44.75em) {
+	section { padding: 1em 2em; }
+}
+
+@media screen and (max-width: 25em) {
+	.codrops-header { font-size: 0.8em; }
+	section.related { font-size: 1.2em; }
+	.codrops-icon span { display: none; }
+}
+
+.left-side {
+	width: 30%;
+	height: 100vh;
+	/*background: red;*/
+	float: left;
+	position: relative;
+	overflow: hidden;
+}
+.right-side {
+	width: 70%;
+	height: 100vh;
+	float: left;
+
+	
+}
+
+.modal__circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 200%;
+    width: 200%;
+	background-image: url('hands-people-woman-working - Copy.jpg');
+    background-color: linear-gradient(45deg, #8e24aa ,#540fdc );
+    border-radius: 50%;
+    -webkit-transform: translateX(-50%) translateY(-25%);
+     transform: translateX(-50%) translateY(-25%); 
+}
+
+
+
+.simform-inner label {
+	font-size: 28px;
+}
+
+.final-message {
+	color: #751bbf;
+	font-size: 30px;
+}
