@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online  GST  Invoice Generator</title>
+<link rel="stylesheet" href="bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="invoicegenerator.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.1.135/jspdf.min.js"></script>
+<script type="text/javascript" src="http://cdn.uriit.ru/jsPDF/libs/adler32cs.js/adler32cs.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js
+"></script>
+<script type="text/javascript">
+	
+	$(function () {
+
+    var specialElementHandlers = {
+        '#editor': function (element,renderer) {
+            return true;
+        }
+    };
+ $('#cmd').click(function () {
+        var doc = new jsPDF();
+        doc.fromHTML($('#target').html(), 15, 15, {
+            'width': 170,'elementHandlers': specialElementHandlers
+        });
+        doc.save('sample-file.pdf');
+    });  
+});
+</script>
+<style type="text/css">
+	@media print {
+				body {
+				line-height: 1.3;
+					}
+					h1 {
+				font-size: 24pt;
+				}
+
+				h2 {
+				font-size: 14pt;
+				margin-top: 25px;
+				}
+
+				aside h2 {
+				font-size: 18pt;
+				}
+
+}
+
+</style>
+
+
+</head>
+
+<body >
+<div id="target">
+
+	<div class="b-div" id="b-div">
+
+		<div class="body-div container">
+			<div class="main-div row">
+				<div class="lft-main-div">
+					<form name="invoiceGenerator" class="inv-generator">
+
+						<div>
+							<table width="100%" cellpadding="0" cellspacing="0">
+								<tbody>
+									<tr>
+										<td width="51%">
+											<input type="text" id="address1" class="adr bld f20" tabindex="1" autofocus="focus" placeholder="Your Company" onfocus="InvoiceGenerator.strikeInfo('compAddInfo', true); InvoiceGenerator.showHideErr('address1', false);" onblur="InvoiceGenerator.strikeInfo('compAddInfo', false)" name="company_name" data-json-node="company_name" data-is-array="false">
+														<small id="address1_err" class="text-danger hide">Please fill in your company’s name</small>
+														<br>
+														<input type="text" id="custName" class="adr" tabindex="2" onfocus="InvoiceGenerator.strikeInfo('compAddInfo', true)" placeholder="Your Name" onblur="InvoiceGenerator.strikeInfo('compAddInfo', false)" name="user_name" data-json-node="user_name" data-is-array="false">
+														<br>
+
+														<input type="text" id="company_gstin" class="adr" tabindex="3" placeholder="Company's GSTIN" onchange="InvoiceGenerator.gstNoChanged('company')" onfocus="InvoiceGenerator.strikeInfo('compAddInfo', true)" onblur="InvoiceGenerator.strikeInfo('compAddInfo', false)" name="company_gstin_number" data-json-node="company_gstin_number" data-is-array="false">
+														<br>
+
+														<input type="text" id="address2" class="adr" tabindex="3" placeholder="Company’s Address" onfocus="InvoiceGenerator.strikeInfo('compAddInfo', true)" onblur="InvoiceGenerator.strikeInfo('compAddInfo', false)" name="company_address_1" data-json-node="company_address_1" data-is-array="false">
+														<br>
+														<input type="text" class="adr" id="address3" tabindex="4" placeholder="City" onfocus="InvoiceGenerator.strikeInfo('compAddInfo', true)" onblur="InvoiceGenerator.strikeInfo('compAddInfo', false)" name="company_address_2" data-json-node="company_address_2" data-is-array="false">
+														<br>
+
+														<select class="hide" tabindex="4" id="companyStateSelect" onchange="InvoiceGenerator.stateSelected('companyState')" onblur="InvoiceGenerator.stateSelectorFocusedOut('companyState');InvoiceGenerator.strikeInfo('compAddInfo', false)" onfocus="InvoiceGenerator.strikeInfo('compAddInfo', true)">
+															<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option><option value="Andhra Pradesh">Andhra Pradesh</option><option value="Arunachal Pradesh">Arunachal Pradesh</option><option value="Assam">Assam</option><option value="Bihar">Bihar</option><option value="Chandigarh">Chandigarh</option><option value="Chhattisgarh">Chhattisgarh</option><option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option><option value="Daman and Diu">Daman and Diu</option><option value="Delhi">Delhi</option><option value="Goa">Goa</option><option value="Gujarat">Gujarat</option><option value="Haryana">Haryana</option><option value="Himachal Pradesh">Himachal Pradesh</option><option value="Jammu and Kashmir">Jammu and Kashmir</option><option value="Jharkhand">Jharkhand</option><option value="Karnataka">Karnataka</option><option value="Kerala">Kerala</option><option value="Lakshadweep">Lakshadweep</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Maharashtra">Maharashtra</option><option value="Manipur">Manipur</option><option value="Meghalaya">Meghalaya</option><option value="Mizoram">Mizoram</option><option value="Nagaland">Nagaland</option><option value="Odisha">Odisha</option><option value="Puducherry">Puducherry</option><option value="Punjab">Punjab</option><option value="Rajasthan">Rajasthan</option><option value="Sikkim">Sikkim</option><option value="Tamil Nadu">Tamil Nadu</option><option value="Telangana">Telangana</option><option value="Tripura">Tripura</option><option value="Uttar Pradesh">Uttar Pradesh</option><option value="Uttarakhand">Uttarakhand</option><option value="West Bengal">West Bengal</option></select>
+															<input type="text" class="adr" tabindex="4" id="companyState" placeholder="State" name="company_state" data-json-node="company_state" data-is-array="false" onfocus="InvoiceGenerator.showStateSelect('companyState')">
+															<br>
+
+
+															<input type="text" class="adr" tabindex="4" id="address4" value="India" placeholder="Country" onfocus="InvoiceGenerator.strikeInfo('compAddInfo', true)" onblur="InvoiceGenerator.strikeInfo('compAddInfo', false)" name="company_country" data-json-node="company_country" data-is-array="false">
+															<br>
+														</td>
+														<td width="50%" class="vtop text-right" colspan="2">
+															<input class="c-name" type="text" value="TAX INVOICE" tabindex="5" id="title" name="title" data-json-node="title" data-is-array="false">
+														</td>
+													</tr>
+												</tbody>
+											</table>
+											<ul class="pull-left" style="width:100%;margin-top:50px;">
+												<li class="adr-lft pull-left">
+													<input type="text" value="Bill To:" id="billToLabel" class="adr bill-to bld" tabindex="6" onfocus="InvoiceGenerator.strikeInfo('clientAddInfo', true)" onblur="InvoiceGenerator.strikeInfo('clientAddInfo', false)" name="bill_to_label" data-json-node="bill_to_label" data-is-array="false">
+													<br>
+													<input type="text" id="billingAddress1" class="adr" tabindex="6" placeholder="Your Client’s Company" onfocus="InvoiceGenerator.strikeInfo('clientAddInfo', true); InvoiceGenerator.showHideErr('billingAddress1', false);" onblur="InvoiceGenerator.strikeInfo('clientAddInfo', false)" name="customer_name" data-json-node="customer_name" data-is-array="false">
+													<small id="billingAddress1_err" class="text-danger hide">Please fill in your client’s name or their company name</small>
+													<br>
+
+													<input type="text" id="customer_gstin" class="adr" tabindex="6" placeholder="Client's GSTIN" onchange="InvoiceGenerator.gstNoChanged('customer')" onfocus="InvoiceGenerator.strikeInfo('clientAddInfo', true)" onblur="InvoiceGenerator.strikeInfo('clientAddInfo', false)" name="customer_gstin_number" data-json-node="customer_gstin_number" data-is-array="false">
+													<br>
+
+													<input type="text" id="billingAddress2" class="adr" tabindex="7" placeholder="Client’s Address" onfocus="InvoiceGenerator.strikeInfo('clientAddInfo', true)" onblur="InvoiceGenerator.strikeInfo('clientAddInfo', false)" name="customer_billing_address_1" data-json-node="customer_billing_address_1" data-is-array="false">
+													<br>
+													<input type="text" class="adr" id="billingAddress3" tabindex="8" placeholder="City" onfocus="InvoiceGenerator.strikeInfo('clientAddInfo', true)" onblur="InvoiceGenerator.strikeInfo('clientAddInfo', false)" name="customer_billing_address_2" data-json-node="customer_billing_address_2" data-is-array="false">
+													<br>
+
+													<select class="hide" tabindex="10" id="customerStateSelect" onchange="InvoiceGenerator.stateSelected('customerState')" onblur="InvoiceGenerator.stateSelectorFocusedOut('customerState');InvoiceGenerator.strikeInfo('clientAddInfo', false)" onfocus="InvoiceGenerator.strikeInfo('clientAddInfo', true)">
+														<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option><option value="Andhra Pradesh">Andhra Pradesh</option><option value="Arunachal Pradesh">Arunachal Pradesh</option><option value="Assam">Assam</option><option value="Bihar">Bihar</option><option value="Chandigarh">Chandigarh</option><option value="Chhattisgarh">Chhattisgarh</option><option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option><option value="Daman and Diu">Daman and Diu</option><option value="Delhi">Delhi</option><option value="Goa">Goa</option><option value="Gujarat">Gujarat</option><option value="Haryana">Haryana</option><option value="Himachal Pradesh">Himachal Pradesh</option><option value="Jammu and Kashmir">Jammu and Kashmir</option><option value="Jharkhand">Jharkhand</option><option value="Karnataka">Karnataka</option><option value="Kerala">Kerala</option><option value="Lakshadweep">Lakshadweep</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Maharashtra">Maharashtra</option><option value="Manipur">Manipur</option><option value="Meghalaya">Meghalaya</option><option value="Mizoram">Mizoram</option><option value="Nagaland">Nagaland</option><option value="Odisha">Odisha</option><option value="Puducherry">Puducherry</option><option value="Punjab">Punjab</option><option value="Rajasthan">Rajasthan</option><option value="Sikkim">Sikkim</option><option value="Tamil Nadu">Tamil Nadu</option><option value="Telangana">Telangana</option><option value="Tripura">Tripura</option><option value="Uttar Pradesh">Uttar Pradesh</option><option value="Uttarakhand">Uttarakhand</option><option value="West Bengal">West Bengal</option></select>
+														<input type="text" class="adr" tabindex="10" id="customerState" placeholder="State" name="customer_billing_state" data-json-node="customer_billing_state" data-is-array="false" onfocus="InvoiceGenerator.showStateSelect('customerState')">
+														<br>
+
+
+														<input type="text" class="adr" tabindex="10" id="billingAddress5" value="India" placeholder="Country" onfocus="InvoiceGenerator.strikeInfo('clientAddInfo', true)" onblur="InvoiceGenerator.strikeInfo('clientAddInfo', false)" name="customer_billing_country" data-json-node="customer_billing_country" data-is-array="false">
+														<br>
+													</li>
+													<li class="adr-rgt pull-left">
+														<table width="100%" cellpadding="0" cellspacing="0" class="bill" style="table-layout: fixed">
+															<tbody>
+																<tr>
+																	<td class="lft-txt" width="40%">
+																		<input type="text" value="Invoice#" id="invNumberLabel" class="bld text-left w100" tabindex="12" onfocus="InvoiceGenerator.strikeInfo('invNumberInfo', true)" onblur="InvoiceGenerator.strikeInfo('invNumberInfo', false)" name="invoice_number_label" data-json-node="invoice_number_label" data-is-array="false">
+																	</td>
+																	<td>
+																		<input type="text" class="w100" id="invNumber" tabindex="13" placeholder="INV-12" onfocus="InvoiceGenerator.strikeInfo('invNumberInfo', true)" onblur="InvoiceGenerator.strikeInfo('invNumberInfo', false)" name="invoice_number" data-json-node="invoice_number" data-is-array="false">
+																	</td>
+																</tr>
+																<tr>
+																	<td class="lft-txt">
+																		<input type="text" value="Invoice Date" id="invoiceDateLabel" class="bld text-left w100" tabindex="14" onfocus="InvoiceGenerator.strikeInfo('invNumberInfo', true)" onblur="InvoiceGenerator.strikeInfo('invNumberInfo', false)" name="invoice_date_label" data-json-node="invoice_date_label" data-is-array="false">
+																	</td>
+																	<td>
+																		<input class="w100" type="text" id="invoiceDate" tabindex="15" placeholder="Aug 31, 2017" onfocus="InvoiceGenerator.strikeInfo('invNumberInfo', true)" onblur="InvoiceGenerator.strikeInfo('invNumberInfo', false)" name="invoice_date" data-json-node="invoice_date" data-is-array="false">
+																	</td>
+																</tr>
+																<tr>
+																</tr>
+																<tr>
+																	<td class="lft-txt">
+																		<input value="Due Date" id="dueDateLabel" class="bld text-left w100" type="text" tabindex="16" onfocus="InvoiceGenerator.strikeInfo('invNumberInfo', true)" onblur="InvoiceGenerator.strikeInfo('invNumberInfo', false)" name="due_date_label" data-json-node="due_date_label" data-is-array="false">
+
+																	</td>
+																	<td>
+																		<input id="dueDate" class="w100" tabindex="17" type="text" placeholder="Aug 31, 2017" onfocus="InvoiceGenerator.strikeInfo('invNumberInfo', true)" onblur="InvoiceGenerator.strikeInfo('invNumberInfo', false)" name="due_date" data-json-node="due_date" data-is-array="false">
+																	</td>
+																</tr>
+															</tbody>
+														</table>
+													</li>
+												</ul>
+
+												<ul class="pull-left" style="width:100%;margin-top:25px;">
+													<li class="adr-left">
+														<span class="adr">Place Of Supply:</span>
+														<select class="hide" tabindex="17" id="placeOfSupplySelect" onchange="InvoiceGenerator.stateSelected('placeOfSupply')" onblur="InvoiceGenerator.stateSelectorFocusedOut('placeOfSupply');">
+															<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option><option value="Andhra Pradesh">Andhra Pradesh</option><option value="Arunachal Pradesh">Arunachal Pradesh</option><option value="Assam">Assam</option><option value="Bihar">Bihar</option><option value="Chandigarh">Chandigarh</option><option value="Chhattisgarh">Chhattisgarh</option><option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option><option value="Daman and Diu">Daman and Diu</option><option value="Delhi">Delhi</option><option value="Goa">Goa</option><option value="Gujarat">Gujarat</option><option value="Haryana">Haryana</option><option value="Himachal Pradesh">Himachal Pradesh</option><option value="Jammu and Kashmir">Jammu and Kashmir</option><option value="Jharkhand">Jharkhand</option><option value="Karnataka">Karnataka</option><option value="Kerala">Kerala</option><option value="Lakshadweep">Lakshadweep</option><option value="Madhya Pradesh">Madhya Pradesh</option><option value="Maharashtra">Maharashtra</option><option value="Manipur">Manipur</option><option value="Meghalaya">Meghalaya</option><option value="Mizoram">Mizoram</option><option value="Nagaland">Nagaland</option><option value="Odisha">Odisha</option><option value="Puducherry">Puducherry</option><option value="Punjab">Punjab</option><option value="Rajasthan">Rajasthan</option><option value="Sikkim">Sikkim</option><option value="Tamil Nadu">Tamil Nadu</option><option value="Telangana">Telangana</option><option value="Tripura">Tripura</option><option value="Uttar Pradesh">Uttar Pradesh</option><option value="Uttarakhand">Uttarakhand</option><option value="West Bengal">West Bengal</option></select>
+															<input type="text" tabindex="17" id="placeOfSupply" placeholder="State" name="place_of_supply" data-json-node="place_of_supply" data-is-array="false" onfocus="InvoiceGenerator.showStateSelect('placeOfSupply')">
+															<br>
+														</li>
+													</ul>
+
+												</div>
+												<div class="lineItemDIV">
+													<table width="100%" cellpadding="0" cellspacing="0" class="column" style="table-layout: fixed">
+														<thead>
+															<tr class="hd">
+																<td width="48%">
+																	<input style="text-align:left;" type="text" id="itemDescLabel" value="Item Description" class="bld w100" tabindex="19" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)" name="name" data-json-node="name" data-is-array="false" data-parent-json="line_items_header">
+																</td>
+																<td width="17%">
+																	<input type="text" value="Qty" id="itemQtyLabel" class="bld w100" tabindex="19" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)" name="quantity" data-json-node="quantity" data-is-array="false" data-parent-json="line_items_header">
+																</td>
+																<td width="17%">
+																	<input type="text" value="Rate" id="itemRateLabel" class="bld w100 text-left" tabindex="19" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)" name="rate" data-json-node="rate" data-is-array="false" data-parent-json="line_items_header">
+																</td>
+
+																<td width="17%">
+																	<input readonly="" type="text" value="SGST" id="itemTaxLabel1" class="bld w100 text-left" name="tax1" data-json-node="tax1_name" data-is-array="false" data-parent-json="line_items_header">
+																</td>
+																<td width="17%" india-gst-tax2="">
+																	<input readonly="" type="text" value="CGST" id="itemTaxLabel2" class="bld w100 text-left" name="tax2" data-json-node="tax2_name" data-is-array="false" data-parent-json="line_items_header">
+																</td>
+																<td width="17%">
+																	<input readonly="" type="text" value="Cess" id="itemTaxLabel3" class="bld w100 text-left" name="tax3" data-json-node="tax3_name" data-is-array="false" data-parent-json="line_items_header">
+																</td>
+
+																<td width="18%">
+																	<input type="text" value="Amount" id="itemAmtLabel" class="bld w100 text-right" style="text-align:right;" tabindex="19" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)" name="amount" data-json-node="amount" data-is-array="false" data-parent-json="line_items_header">
+																</td>
+																<td style="border-bottom:none;background:none;border-top:none" width="2%" class="dele-icon">&nbsp;</td>
+															</tr>
+														</thead>
+
+														<tbody class="lineItems">
+															<tr class="row-item trClone hide" id="lineItem.0" onclick="InvoiceGenerator.strikeInfo('itemInfo', true)" onmouseover="javascript:CreateInvoiceUtil.showCloseIcon(this,true)" onmouseout="javascript:CreateInvoiceUtil.showCloseIcon(this,false)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)">
+																<td>
+																	<textarea type="text" class="w100" tabindex="20" id="itemDesc.0" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onkeypress="javascript:CreateInvoiceUtil.checkAndAddNewLineItem(this, event)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)" placeholder="Enter item name/description" name="itemDesc.0" data-json-node="name" data-is-array="true" data-array-parent="line_items"></textarea>
+
+																	<input type="hidden" value="HSN/SAC" id="hsnLabel.0" name="hsnLabel.0" data-json-node="hsn_sac_label" data-is-array="true" data-array-parent="line_items">
+																	<input type="text" tabindex="20" id="hsnValue.0" placeholder="HSN/SAC" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)" name="hsnValue.0" data-json-node="hsn_sac_value" data-is-array="true" data-array-parent="line_items">
+
+																</td>
+																<td>
+																	<input type="text" class="w100 text-right" value="1" tabindex="20" id="itemQty.0" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemQty.0" data-json-node="quantity" data-is-array="true" data-array-parent="line_items">
+																</td>
+																<td>
+																	<input type="text" class="w100 text-right" value="0.00" tabindex="20" id="itemRate.0" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemRate.0" data-json-node="rate" data-is-array="true" data-array-parent="line_items">
+																</td>
+
+																<td>
+																	<input type="text" class="w100 text-right" value="0" tabindex="20" id="itemTax1.0" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemTax1.0" data-json-node="tax1" data-is-array="true" data-array-parent="line_items">
+																</td>
+																<td india-gst-tax2="">
+																	<input type="text" class="w100 text-right" value="0" tabindex="20" id="itemTax2.0" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemTax2.0" data-json-node="tax2" data-is-array="true" data-array-parent="line_items">
+																</td>
+																<td>
+																	<input type="text" class="w100 text-right" value="0" tabindex="20" id="itemTax3.0" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemTax3.0" data-json-node="tax3" data-is-array="true" data-array-parent="line_items">
+																</td>
+
+																<td>
+																	<input readonly="" class="cursor-disabled w100 text-right" id="itemTotal.0" title="Amount is calculated automatically." name="itemTotal.0" data-json-node="amount" data-is-array="true" data-array-parent="line_items" value="0.00">
+																</td>
+
+																<td style="border-bottom:none;background:none;border-top:none" class="dele-icon">
+																	<div style="padding-top:4px"><a class="closeicon hide" style="cursor:pointer" title="Delete Row" id="itemClose.0" onclick="javascript:CreateInvoiceUtil.removeLineItem(this)"><span class="del pull-left"></span></a>
+																	</div>
+																</td>
+															</tr>
+
+															<tr class="row-item " id="lineItem.1" onclick="InvoiceGenerator.strikeInfo('itemInfo', true)" onmouseover="javascript:CreateInvoiceUtil.showCloseIcon(this,true)" onmouseout="javascript:CreateInvoiceUtil.showCloseIcon(this,false)">
+																<td>
+																	<textarea type="text" class="w100" tabindex="21" id="itemDesc.1" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" placeholder="Enter item name/description" onkeypress="javascript:CreateInvoiceUtil.checkAndAddNewLineItem(this, event)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemDesc.1" data-json-node="name" data-is-array="true" data-array-parent="line_items" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 46px;">Brochure Design</textarea>
+
+																	<input type="hidden" value="HSN/SAC" id="hsnLabel.1" name="hsnLabel.1" data-json-node="hsn_sac_label" data-is-array="true" data-array-parent="line_items">
+																	<input type="text" tabindex="21" id="hsnValue.1" placeholder="HSN/SAC" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)" name="hsnValue.1" data-json-node="hsn_sac_value" data-is-array="true" data-array-parent="line_items">
+
+																</td>
+																<td>
+																	<input type="text" class="w100 text-right" value="2" tabindex="21" id="itemQty.1" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemQty.1" data-json-node="quantity" data-is-array="true" data-array-parent="line_items">
+																</td>
+																<td>
+																	<input type="text" class="w100 text-right" value="100.00" tabindex="21" id="itemRate.1" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemRate.1" data-json-node="rate" data-is-array="true" data-array-parent="line_items">
+																</td>
+
+																<td>
+																	<input type="text" class="w100 text-right" value="10" tabindex="21" id="itemTax1.1" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemTax1.1" data-json-node="tax1" data-is-array="true" data-array-parent="line_items">
+																</td>
+																<td india-gst-tax2="">
+																	<input type="text" class="w100 text-right" value="10" tabindex="21" id="itemTax2.1" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemTax2.1" data-json-node="tax2" data-is-array="true" data-array-parent="line_items">
+																</td>
+																<td>
+																	<input type="text" class="w100 text-right" value="0" tabindex="21" id="itemTax3.1" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemTax3.1" data-json-node="tax3" data-is-array="true" data-array-parent="line_items">
+																</td>
+
+																<td>
+																	<input readonly="" class="cursor-disabled w100 text-right" id="itemTotal.1" title="Amount is calculated automatically." name="itemTotal.1" data-json-node="amount" data-is-array="true" data-array-parent="line_items" value="200.00">
+																</td>
+
+																<td style="border-bottom:none;background:none;border-top:none" class="dele-icon">
+																	<div style="padding-top:4px"><a class="closeicon hide" title="Delete Row" id="itemClose.1" style="cursor:pointer;" onclick="javascript:CreateInvoiceUtil.removeLineItem(this)"><span class="del pull-left">&nbsp;</span></a> </div>
+																</td>
+															</tr>
+															<tr class="row-item  " id="lineItem.2" onclick="InvoiceGenerator.strikeInfo('itemInfo', true)" onmouseover="javascript:CreateInvoiceUtil.showCloseIcon(this,true)" onmouseout="javascript:CreateInvoiceUtil.showCloseIcon(this,false)">
+																<td>
+																	<textarea type="text" class="w100" id="itemDesc.2" tabindex="22" placeholder="Enter item name/description" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onkeypress="javascript:CreateInvoiceUtil.checkAndAddNewLineItem(this, event)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemDesc.2" data-json-node="name" data-is-array="true" data-array-parent="line_items" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 46px;"></textarea>
+
+																	<input type="hidden" value="HSN/SAC" id="hsnLabel.2" name="hsnLabel.2" data-json-node="hsn_sac_label" data-is-array="true" data-array-parent="line_items">
+																	<input type="text" tabindex="22" id="hsnValue.2" placeholder="HSN/SAC" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)" name="hsnValue.2" data-json-node="hsn_sac_value" data-is-array="true" data-array-parent="line_items">
+
+																</td>
+																<td>
+																	<input type="text" value="1" class="w100 text-right" id="itemQty.2" tabindex="22" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this); InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemQty.2" data-json-node="quantity" data-is-array="true" data-array-parent="line_items">
+																</td>
+																<td>
+																	<input type="text" class="w100 text-right" value="0.00" id="itemRate.2" tabindex="22" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this); InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemRate.2" data-json-node="rate" data-is-array="true" data-array-parent="line_items">
+																</td>
+
+																<td>
+																	<input type="text" class="w100 text-right" value="0" tabindex="22" id="itemTax1.2" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemTax1.2" data-json-node="tax1" data-is-array="true" data-array-parent="line_items">
+																</td>
+																<td india-gst-tax2="">
+																	<input type="text" class="w100 text-right" value="0" tabindex="22" id="itemTax2.2" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemTax2.2" data-json-node="tax2" data-is-array="true" data-array-parent="line_items">
+																</td>
+																<td>
+																	<input type="text" class="w100 text-right" value="0" tabindex="22" id="itemTax3.2" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemTax3.2" data-json-node="tax3" data-is-array="true" data-array-parent="line_items">
+																</td>
+
+																<td>
+																	<input readonly="" class="cursor-disabled w100 text-right" id="itemTotal.2" title="Amount is calculated automatically." name="itemTotal.2" data-json-node="amount" data-is-array="true" data-array-parent="line_items" value="0.00">
+																</td>
+
+																<td style="border-bottom:none;background:none;border-top:none" class="dele-icon">
+																	<div style="padding-top:4px"><a class="closeicon hide" id="itemClose.2" title="Delete Row" style="cursor:pointer;text-decoration:underline;color:#DE7110" onclick="javascript:CreateInvoiceUtil.removeLineItem(this)"><span class="del pull-left">&nbsp;</span></a>
+																	</div>
+																</td>
+															</tr>
+															<tr class="row-item  " onclick="InvoiceGenerator.strikeInfo('itemInfo', true)" id="lineItem.3" onmouseover="javascript:CreateInvoiceUtil.showCloseIcon(this,true)" onmouseout="javascript:CreateInvoiceUtil.showCloseIcon(this,false)">
+
+																<td>
+																	<textarea type="text" class="w100 lastLineItem" tabindex="23" placeholder="Enter item name/description" onkeypress="javascript:CreateInvoiceUtil.checkAndAddNewLineItem(this, event)" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)" id="itemDesc.3" name="itemDesc.3" data-json-node="name" data-is-array="true" data-array-parent="line_items" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 46px;"></textarea>
+
+																	<input type="hidden" value="HSN/SAC" id="hsnLabel.3" name="hsnLabel.3" data-json-node="hsn_sac_label" data-is-array="true" data-array-parent="line_items">
+																	<input type="text" tabindex="23" id="hsnValue.3" placeholder="HSN/SAC" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="InvoiceGenerator.strikeInfo('itemInfo', false)" name="hsnValue.3" data-json-node="hsn_sac_value" data-is-array="true" data-array-parent="line_items">
+
+																</td>
+																<td>
+																	<input type="text" class="w100 text-right" value="1" id="itemQty.3" tabindex="23" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this); InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemQty.3" data-json-node="quantity" data-is-array="true" data-array-parent="line_items">
+																</td>
+																<td>
+																	<input type="text" class="w100 text-right" value="0.00" id="itemRate.3" tabindex="23" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this); InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemRate.3" data-json-node="rate" data-is-array="true" data-array-parent="line_items">
+																</td>
+
+																<td>
+																	<input type="text" class="w100 text-right" value="0" tabindex="23" id="itemTax1.3" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemTax1.3" data-json-node="tax1" data-is-array="true" data-array-parent="line_items">
+																</td>
+																<td india-gst-tax2="">
+																	<input type="text" class="w100 text-right" value="0" tabindex="23" id="itemTax2.3" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemTax2.3" data-json-node="tax2" data-is-array="true" data-array-parent="line_items">
+																</td>
+																<td>
+																	<input type="text" class="w100 text-right" value="0" tabindex="23" id="itemTax3.3" onfocus="InvoiceGenerator.strikeInfo('itemInfo', true)" onblur="javascript:CreateInvoiceUtil.calculateItemTotal(this);InvoiceGenerator.strikeInfo('itemInfo', false)" name="itemTax3.3" data-json-node="tax3" data-is-array="true" data-array-parent="line_items">
+																</td>
+
+																<td>
+																	<input readonly="" class="cursor-disabled w100 text-right" id="itemTotal.3" title="Amount is calculated automatically." name="itemTotal.3" data-json-node="amount" data-is-array="true" data-array-parent="line_items" value="0.00">
+																</td>
+
+																<td style="border-bottom:none;background:none;border-top:none" class="dele-icon">
+																	<div style="padding-top:4px"><a class="closeicon hide" id="itemClose.3" title="Delete Row" style="cursor:pointer;text-decoration:underline;color:#DE7110;" onclick="javascript:CreateInvoiceUtil.removeLineItem(this)"><span class="del pull-left">&nbsp;</span></a>
+																	</div>
+																</td>
+															</tr>
+														</tbody>
+														<tbody>
+															<tr>
+																<td colspan="2" id="add-new-item">
+
+																	<div>
+																		<a style="cursor:pointer;margin-left:0px;margin-top: -16px;" title="Add Row" onclick="javascript:CreateInvoiceUtil.addInvoiceLineItem()"><span class="add">Add Line Item</span></a>
+																	</div>
+																</td>
+																<td id="total-section" colspan="5" style="border-right:none;">
+																	<table width="100%" cellpadding="0" cellspacing="0" style="margin-left:10px;border-bottom:solid 1px #c7c7c7;">
+																		<tbody>
+																			<tr class="sav-amo text-right">
+																				<td width="40%" class="bdr-non">
+																					<input type="text" value="Sub Total" class="total-label" id="subTotalLabel" tabindex="24" name="sub_total_label" data-json-node="sub_total_label" data-is-array="false">
+																				</td>
+																				<td class="bdr-non">
+																					<span class="amount bld cursor-disabled" id="subTotal" title="Sub total is calculated automatically." name="sub_total" data-json-node="sub_total" data-is-array="false">200.00</span>
+																				</td>
+																			</tr>
+
+																			<tr class="sav-amo text-right hide totalTaxClone" id="totalTax.0" india-gst-total-tax="">
+																				<td width="40%" class="bdr-non">
+																					<input readonly="" type="text" value="SGST" class="total-label" id="totalTaxLabel.0" name="taxName.0" data-json-node="tax_name" data-is-array="true" data-array-parent="taxes">
+																				</td>
+																				<td class="bdr-non">
+																					<input readonly="" class="amount bld cursor-disabled" type="text" id="totalTaxAmt.0" name="taxValue.0" data-json-node="tax" data-is-array="true" data-array-parent="taxes">
+																				</td>
+																			</tr><tr class="sav-amo text-right" id="totalTax.1" india-gst-total-tax="">
+																			<td width="40%" class="bdr-non">
+																				<input readonly="" type="text" value="SGST" class="total-label" id="totalTaxLabel.1" name="taxName.1" data-json-node="tax_name" data-is-array="true" data-array-parent="taxes">
+																			</td>
+																			<td class="bdr-non">
+																				<input readonly="" class="amount bld cursor-disabled" type="text" id="totalTaxAmt.1" name="taxValue.1" data-json-node="tax" data-is-array="true" data-array-parent="taxes">
+																			</td>
+																		</tr><tr class="sav-amo text-right" id="totalTax.2" india-gst-total-tax="">
+																		<td width="40%" class="bdr-non">
+																			<input readonly="" type="text" value="SGST" class="total-label" id="totalTaxLabel.2" name="taxName.2" data-json-node="tax_name" data-is-array="true" data-array-parent="taxes">
+																		</td>
+																		<td class="bdr-non">
+																			<input readonly="" class="amount bld cursor-disabled" type="text" id="totalTaxAmt.2" name="taxValue.2" data-json-node="tax" data-is-array="true" data-array-parent="taxes">
+																		</td>
+																	</tr>
+
+																	<tr class="tot">
+																		<td width="40%">
+																			<input type="text" value="TOTAL" class="total-label" id="totalLabel" tabindex="26" name="total_label" data-json-node="total_label" data-is-array="false">
+																		</td>
+																		<td>
+																			<select class="hide select-currency" tabindex="27" id="currencySelect" onchange="InvoiceGenerator.showCurrencySelect('currencySelect', 'currencySym')">
+																				<option value="AED" symbol="AED">AED - UAE Dirham (AED)</option><option value="AFN" symbol="AFN">AFN - Afghani (AFN)</option><option value="ALL" symbol="Lek">ALL - Lek (Lek)</option><option value="AMD" symbol="AMD">AMD - Armenian Dram (AMD)</option><option value="ANG" symbol="ƒ">ANG - Netherlands Antillian Guilder (ƒ)</option><option value="AOA" symbol="AOA">AOA - Kwanza (AOA)</option><option value="ARS" symbol="$">ARS - Argentine Peso ($)</option><option value="AUD" symbol="$">AUD - Australian Dollar ($)</option><option value="AWG" symbol="ƒ">AWG - Aruban Guilder (ƒ)</option><option value="AZN" symbol="AZN">AZN - Azerbaijanian Manat (AZN)</option><option value="BAM" symbol="KM">BAM - Convertible Marks (KM)</option><option value="BBD" symbol="$">BBD - Barbados Dollar ($)</option><option value="BDT" symbol="BDT">BDT - Taka (BDT)</option><option value="BGN" symbol="BGN">BGN - Bulgarian Lev (BGN)</option><option value="BHD" symbol="BHD">BHD - Bahraini Dinar (BHD)</option><option value="BIF" symbol="BIF">BIF - Burundi Franc (BIF)</option><option value="BMD" symbol="$">BMD - Bermudian Dollar (Bermuda Dollar) ($)</option><option value="BND" symbol="$">BND - Brunei Dollar ($)</option><option value="BOB" symbol="$b">BOB - Boliviano ($b)</option><option value="BOV" symbol="BOV">BOV - Mvdol (BOV)</option><option value="BRL" symbol="R$">BRL - Brazilian Real (R$)</option><option value="BSD" symbol="$">BSD - Bahamian Dollar ($)</option><option value="BTC" symbol="BTC">BTC - Bitcoin (BTC)</option><option value="BTN" symbol="BTN">BTN - Ngultrum (BTN)</option><option value="BWP" symbol="P">BWP - Pula (P)</option><option value="BYR" symbol="p.">BYR - Belarussian Ruble (p.)</option><option value="BZD" symbol="BZ$">BZD - Belize Dollar (BZ$)</option><option value="CAD" symbol="$">CAD - Canadian Dollar ($)</option><option value="CDF" symbol="CDF">CDF - Franc Congolais (CDF)</option><option value="CHE" symbol="CHE">CHE - WIR Euro (CHE)</option><option value="CHF" symbol="CHF">CHF - Swiss Franc (CHF)</option><option value="CHW" symbol="CHW">CHW - WIR Franc (CHW)</option><option value="CLF" symbol="CLF">CLF - Unidades de formento (CLF)</option><option value="CLP" symbol="$">CLP - Chilean Peso ($)</option><option value="CNY" symbol="CNY">CNY - Yuan Renminbi (CNY)</option><option value="COP" symbol="$">COP - Colombian Peso ($)</option><option value="COU" symbol="COU">COU - Unidad de Valor Real (COU)</option><option value="CRC" symbol="CRC">CRC - Costa Rican Colon (CRC)</option><option value="CUC" symbol="CUC$">CUC - Cuba Convertible Peso (CUC$)</option><option value="CUP" symbol="CUP">CUP - Cuban Peso (CUP)</option><option value="CVE" symbol="CVE">CVE - Cape Verde Escudo (CVE)</option><option value="CYP" symbol="CYP">CYP - Cyprus Pound (CYP)</option><option value="CZK" symbol="CZK">CZK - Czech Koruna (CZK)</option><option value="DJF" symbol="DJF">DJF - Djibouti Franc (DJF)</option><option value="DKK" symbol="kr">DKK - Danish Krone (kr)</option><option value="DOP" symbol="RD$">DOP - Dominican Peso (RD$)</option><option value="DZD" symbol="DZD">DZD - Algerian Dinar (DZD)</option><option value="EEK" symbol="kr">EEK - Kroon (kr)</option><option value="EGP" symbol="£">EGP - Egyptian Pound (£)</option><option value="ERN" symbol="ERN">ERN - Nakfa (ERN)</option><option value="ETB" symbol="ETB">ETB - Ethiopian Birr (ETB)</option><option value="EUR" symbol="€">EUR - Euro (€)</option><option value="FJD" symbol="$">FJD - Fiji Dollar ($)</option><option value="FKP" symbol="£">FKP - Falkland Islands Pound (£)</option><option value="GBP" symbol="£">GBP - Pound Sterling (£)</option><option value="GEL" symbol="GEL">GEL - Lari (GEL)</option><option value="GGP" symbol="£">GGP - Guernsey Pound (£)</option><option value="GHS" symbol="¢">GHS - Cedi (¢)</option><option value="GIP" symbol="£">GIP - Gibraltar Pound (£)</option><option value="GMD" symbol="GMD">GMD - Dalasi (GMD)</option><option value="GNF" symbol="GNF">GNF - Guinea Franc (GNF)</option><option value="GTQ" symbol="Q">GTQ - Quetzal (Q)</option><option value="GWP" symbol="GWP">GWP - Guinea-Bissau Peso (GWP)</option><option value="GYD" symbol="$">GYD - Guyana Dollar ($)</option><option value="HKD" symbol="元">HKD - Hong Kong Dollar (元)</option><option value="HNL" symbol="L">HNL - Lempira (L)</option><option value="HRK" symbol="kn">HRK - Croatian Kuna (kn)</option><option value="HTG" symbol="HTG">HTG - Gourde (HTG)</option><option value="HUF" symbol="Ft">HUF - Forint (Ft)</option><option value="IDR" symbol="Rp">IDR - Rupiah (Rp)</option><option value="ILS" symbol="ILS">ILS - New Israeli Sheqel (ILS)</option><option value="IMP" symbol="£">IMP - Isle of Man Pound (£)</option><option value="INR" symbol="Rs.">INR - Indian Rupee (Rs.)</option><option value="IQD" symbol="IQD">IQD - Iraqi Dinar (IQD)</option><option value="IRR" symbol="IRR">IRR - Iranian Rial (IRR)</option><option value="ISK" symbol="kr">ISK - Iceland Krona (kr)</option><option value="JEP" symbol="£">JEP - Jersey Pound (£)</option><option value="JMD" symbol="J$">JMD - Jamaican Dollar (J$)</option><option value="JOD" symbol="JOD">JOD - Jordanian Dinar (JOD)</option><option value="JPY" symbol="¥">JPY - Yen (¥)</option><option value="KES" symbol="KES">KES - Kenyan Shilling (KES)</option><option value="KGS" symbol="KGS">KGS - Som (KGS)</option><option value="KHR" symbol="KHR">KHR - Riel (KHR)</option><option value="KMF" symbol="KMF">KMF - Comoro Franc (KMF)</option><option value="KPW" symbol="₩">KPW - North Korean Won (₩)</option><option value="KRW" symbol="₩">KRW - Won (₩)</option><option value="KWD" symbol="KWD">KWD - Kuwaiti Dinar (KWD)</option><option value="KYD" symbol="$">KYD - Cayman Islands Dollar ($)</option><option value="KZT" symbol="KZT">KZT - Tenge (KZT)</option><option value="LAK" symbol="LAK">LAK - Kip (LAK)</option><option value="LBP" symbol="£">LBP - Lebanese Pound (£)</option><option value="LKR" symbol="Rs">LKR - Sri Lanka Rupee (Rs)</option><option value="LRD" symbol="$">LRD - Liberian Dollar ($)</option><option value="LSL" symbol="LSL">LSL - Loti (LSL)</option><option value="LTL" symbol="Lt">LTL - Lithuanian Litas (Lt)</option><option value="LVL" symbol="Ls">LVL - Latvian Lats (Ls)</option><option value="LYD" symbol="LYD">LYD - Libyan Dinar (LYD)</option><option value="MAD" symbol="MAD">MAD - Moroccan Dirham (MAD)</option><option value="MDL" symbol="MDL">MDL - Moldovan Leu (MDL)</option><option value="MGA" symbol="MGA">MGA - Malagascy Ariary (MGA)</option><option value="MKD" symbol="MKD">MKD - Denar (MKD)</option><option value="MMK" symbol="MMK">MMK - Kyat (MMK)</option><option value="MNT" symbol="MNT">MNT - Tugrik (MNT)</option><option value="MOP" symbol="MOP">MOP - Pataca (MOP)</option><option value="MRO" symbol="MRO">MRO - Ouguiya (MRO)</option><option value="MTL" symbol="MTL">MTL - Maltese Lira (MTL)</option><option value="MUR" symbol="Rp">MUR - Mauritius Rupee (Rp)</option><option value="MVR" symbol="MVR">MVR - Rufiyaa (MVR)</option><option value="MWK" symbol="MWK">MWK - Kwacha (MWK)</option><option value="MXN" symbol="$">MXN - Mexican Peso ($)</option><option value="MXV" symbol="MXV">MXV - Mexican Unidad de Inversion (UID) (MXV)</option><option value="MYR" symbol="RM">MYR - Malaysian Ringgit (RM)</option><option value="MZN" symbol="MT">MZN - Metical (MT)</option><option value="NAD" symbol="$">NAD - Namibian Dollar ($)</option><option value="NGN" symbol="NGN">NGN - Naira (NGN)</option><option value="NIO" symbol="C$">NIO - Cordoba Oro (C$)</option><option value="NOK" symbol="kr">NOK - Norwegian Krone (kr)</option><option value="NPR" symbol="Rp">NPR - Nepalese Rupee (Rp)</option><option value="NZD" symbol="$">NZD - New Zealand Dollar ($)</option><option value="OMR" symbol="OMR">OMR - Rial Omani (OMR)</option><option value="PAB" symbol="B/.">PAB - Balboa (B/.)</option><option value="PEN" symbol="S/.">PEN - Nuevo Sol (S/.)</option><option value="PGK" symbol="PGK">PGK - Kina (PGK)</option><option value="PHP" symbol="Php">PHP - Philippine Peso (Php)</option><option value="PKR" symbol="Rs">PKR - Pakistan Rupee (Rs)</option><option value="PLN" symbol="PLN">PLN - Zloty (PLN)</option><option value="PYG" symbol="Gs">PYG - Guarani (Gs)</option><option value="QAR" symbol="QAR">QAR - Qatari Rial (QAR)</option><option value="ROL" symbol="ROL">ROL - Old Leu (ROL)</option><option value="RON" symbol="lei">RON - New Leu (lei)</option><option value="RSD" symbol="RSD">RSD - Serbian Dinar (RSD)</option><option value="RUB" symbol="RUB">RUB - Russian Ruble (RUB)</option><option value="RWF" symbol="RWF">RWF - Rwanda Franc (RWF)</option><option value="SAR" symbol="SAR">SAR - Saudi Riyal (SAR)</option><option value="SBD" symbol="$">SBD - Solomon Islands Dollar ($)</option><option value="SCR" symbol="Rp">SCR - Seychelles Rupee (Rp)</option><option value="SDD" symbol="SDD">SDD - Sudanese Dinar (SDD)</option><option value="SDG" symbol="SDG">SDG - Sudanese Pound (SDG)</option><option value="SEK" symbol="kr">SEK - Swedish Krona (kr)</option><option value="SGD" symbol="$">SGD - Singapore Dollar ($)</option><option value="SHP" symbol="£">SHP - Saint Helena Pound (£)</option><option value="SIT" symbol="SIT">SIT - Tolar (SIT)</option><option value="SKK" symbol="SKK">SKK - Slovak Koruna (SKK)</option><option value="SLL" symbol="SLL">SLL - Leone (SLL)</option><option value="SOS" symbol="S">SOS - Somali Shilling (S)</option><option value="SRD" symbol="$">SRD - Surinam Dollar ($)</option><option value="STD" symbol="STD">STD - Dobra (STD)</option><option value="SVC" symbol="$">SVC - El Salvador Colon ($)</option><option value="SYP" symbol="£">SYP - Syrian Pound (£)</option><option value="SZL" symbol="SZL">SZL - Lilangeni (SZL)</option><option value="THB" symbol="THB">THB - Baht (THB)</option><option value="TJS" symbol="TJS">TJS - Somoni (TJS)</option><option value="TMT" symbol="TMT">TMT - Manat (TMT)</option><option value="TND" symbol="TND">TND - Tunisian Dinar (TND)</option><option value="TOP" symbol="TOP">TOP - Paanga (TOP)</option><option value="TRL" symbol="TL">TRL - Turkish Lira (TL)</option><option value="TRY" symbol="YTL">TRY - New Turkish Lira (YTL)</option><option value="TTD" symbol="TT$">TTD - Trinidad and Tobago Dollar (TT$)</option><option value="TVD" symbol="$">TVD - Tuvalu Dollar ($)</option><option value="TWD" symbol="NT$">TWD - New Taiwan Dollar (NT$)</option><option value="TZS" symbol="TZS">TZS - Tanzanian Shilling (TZS)</option><option value="UAH" symbol="UAH">UAH - Hryvnia (UAH)</option><option value="UGX" symbol="UGX">UGX - Uganda Shilling (UGX)</option><option value="USD" symbol="$">USD - US Dollar ($)</option><option value="UYI" symbol="UYI">UYI - Uruguay Peso en Unidades Indexadas (UYI)</option><option value="UYU" symbol="$U">UYU - Peso Uruguayo ($U)</option><option value="UZS" symbol="UZS">UZS - Uzbekistan Sum (UZS)</option><option value="VEB" symbol="VEB">VEB - Bolivar (VEB)</option><option value="VEF" symbol="VEF">VEF - Bolivar Fuerte (VEF)</option><option value="VND" symbol="VND">VND - Dong (VND)</option><option value="VUV" symbol="VUV">VUV - Vatu (VUV)</option><option value="WST" symbol="WST">WST - Tala (WST)</option><option value="XAF" symbol="XAF">XAF - CFA Franc BEAC (XAF)</option><option value="XCD" symbol="$">XCD - East Caribbean Dollar ($)</option><option value="XDR" symbol="XDR">XDR - SDR (XDR)</option><option value="XOF" symbol="XOF">XOF - CFA Franc BCEAO (XOF)</option><option value="XPF" symbol="XPF">XPF - CFP Franc (XPF)</option><option value="YER" symbol="YER">YER - Yemeni Rial (YER)</option><option value="ZAR" symbol="R">ZAR - Rand (R)</option><option value="ZMK" symbol="ZMK">ZMK - Kwacha (ZMK)</option><option value="ZWD" symbol="Z$">ZWD - Zimbabwe Dollar (Z$)</option></select>
+
+																				<input type="hidden" id="currencyCode" name="currency_code" data-json-node="currency_code" data-is-array="false" value="INR">
+																				<input type="text" style="border: 1px solid #444; background-color: #fdf4db;" class="currencycodetxt" maxlength="5" tabindex="27" id="currencySym" value="Rs." name="currency_symbol" data-json-node="currency_symbol" data-is-array="false" onclick="InvoiceGenerator.showCurrencySelect('currencySym', 'currencySelect')">
+
+																				<span class="amount bld cursor-disabled" id="total" title="Amount is calculated automatically." name="total" data-json-node="total" data-is-array="false">240.00</span>
+																			</td>
+																		</tr>
+																	</tbody>
+																</table>
+															</td>
+
+														</tr>
+
+													</tbody>
+													<tbody>
+													</tbody>
+												</table>
+											</div>
+											<div>
+												<input class="terms" value="Notes" id="notesLabel" tabindex="28" name="notes_label" data-json-node="notes_label" data-is-array="false">
+											</div>
+											<div>
+												<textarea class="note" id="customerNotes" tabindex="29" name="notes" data-json-node="notes" data-is-array="false" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 46px;">It was great doing business with you.</textarea>
+											</div>
+											<div >
+												<input class="terms" value="Terms &amp; Conditions" id="termsLabel" tabindex="30" name="terms_and_conditions_label" data-json-node="terms_and_conditions_label" data-is-array="false">
+											</div>
+											<div>
+												<textarea class="note" id="terms" tabindex="31" name="terms_and_conditions" data-json-node="terms_and_conditions" data-is-array="false" style="overflow: hidden; word-wrap: break-word; resize: horizontal; height: 46px;">Please make the payment by the due date.</textarea>
+											</div>
+				<span onclick="print()">Print Invoice</span>
+					<span style="color: #83C0F5">|</span>
+                    	<span id ="cmd" class="link-print"><a href="javascript:demoFromHTML()" class="button">Get PDF</a></span>
+</form>
+</div>
+<script type="text/javascript">"use strict";function setEditionCookie(o,i){var e=new Date,n=i,t=150;e.setDate(e.getDate()+(t||0)),document.cookie=encodeURIComponent(o)+"="+n+"; path=/; expires="+e}function getCookieValue(o){var i=decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*"+encodeURIComponent(o).replace(/[\-\.\+\*]/g,"\\$&")+"\\s*\\=\\s*([^;]*).*$)|^.*$"),"$1"))||null;return i}function continueOnSameEdition(o){setEditionCookie("ZFEdition",o);var i=document.getElementById("modal-edition-box");document.body.style.overflow="auto",i.style.display="none"}function redirectToEdition(o){"global"===o?(urlArray.splice(3,1),window.location=urlArray.join("/")):(urlArray.splice(3,0,o),window.location=urlArray.join("/")+"?source=global_website")}function showEditionBanner(o,i){var e=document.getElementById("modal-edition-box"),n=document.getElementById("edition-box-title"),t=document.getElementById("edition-box-desc"),a=document.getElementById("edition-box-prim-button"),l=document.getElementById("edition-box-sec-button"),d={uk:"United Kingdom",us:"United States",in:"India",ca:"Canada",au:"Australia"},r={uk:"edition-image-uk",us:"edition-image-us",in:"edition-image-india",ca:"edition-image-canada",au:"edition-image-australia"},c=d[o]||"",u=r[o]||"";if(e&&c&&u){var s="Welcome to Zoho",y="We've built an exclusive edition of Zoho Invoice for "+c+". Would you like to try it?";n.innerHTML=s,t.innerHTML=y,a.innerHTML='<a class="btn btn-prim" onclick="switchEdition(\''+o+'\')"><div class="'+u+'"></div><div class="edition-label">Yes, show me</div></a>',l.innerHTML='<a class="btn btn-outline" onclick="continueOnSameEdition(\''+i+"')\">Stay here</a>",document.body.style.overflow="hidden",e.style.display="block",setTimeout(function(){document.getElementById("modal-edition-box-container").style.top=0},120)}}function switchEdition(o){var i=window.location.href,e=i.split("/"),n=editionsArray.indexOf(e[3])!==-1;n?"global"===o?e.splice(3,1):e[3]=o:"global"!==o&&e.splice(3,0,o),setEditionCookie("ZFEdition",o),i=e.join("/"),window.location=i}var url=window.location.href,urlArray=url.split("/"),editionsArray=["uk","ca","au","us","in"],isEditionSpecific=editionsArray.indexOf(urlArray[3])!==-1,editionCountries=["GB","CA","AU","US","IN"],edition=isEditionSpecific?urlArray[3]:"global",userlocation;userlocation=editionCountries.indexOf(window.CountryCode)===-1?"global":"GB"===window.CountryCode?"uk":window.CountryCode.toLowerCase();var locationCookie=getCookieValue("ZFEdition");if(!locationCookie){var locationCookieDeprecated=getCookieValue("ZohoInvoiceLocation");locationCookieDeprecated&&(setEditionCookie("ZFEdition",locationCookieDeprecated),locationCookie=locationCookieDeprecated)}editionsArray.indexOf(locationCookie)===-1&&locationCookie?"global"!==edition&&redirectToEdition("global"):locationCookie?edition!==locationCookie&&("global"===edition?(urlArray.splice(3,0,locationCookie),window.location=urlArray.join("/")):"global"===locationCookie?(urlArray.splice(3,1),window.location=urlArray.join("/")):(urlArray.splice(3,1,locationCookie),window.location=urlArray.join("/"))):userlocation!==edition?showEditionBanner(userlocation,edition):setEditionCookie("ZFEdition",userlocation);</script>
+						<script type="text/javascript" src="script.js"></script>
+						<script type="text/javascript">
+
+							$(document).ready(function() {
+
+
+								for (var i = 1; i <= 3; i++) {
+									autosize($("#itemDesc\\." + i));
+								}
+								autosize($("#terms"));
+								autosize($("#customerNotes"));
+
+								var todayDate = $.fn.datepicker.DPGlobal.formatDate(new Date(), $.fn.datepicker.DPGlobal.parseFormat("M dd, yyyy"), "en");
+
+								$("#invoiceDate").attr("placeholder", todayDate);
+								$("#dueDate").attr("placeholder", todayDate);
+
+								$('#invoiceDate').datepicker({
+									format: "M dd, yyyy",
+									autoclose: true,
+									orientation: 'auto',
+									keyboardNavigation: false,
+									todayHighlight: true
+								});
+
+								$('#dueDate').datepicker({
+									format: "M dd, yyyy",
+									autoclose: true,
+									orientation: 'auto',
+									keyboardNavigation: false,
+									todayHighlight: true
+								});
+
+								$.each(InvoiceGenerator.currencyList, function(key, item) {
+									$('#currencySelect')
+									.append($("<option></option>")
+										.attr("value", key)
+										.attr("symbol", item.currency_symbol)
+										.text(key + " - " + item.currency_name + " (" + item.currency_symbol + ")"));
+								});
+
+								$("#currencySelect").val($("#currencyCode").val());
+
+								$('#signupModal').on('shown.bs.modal', function () {
+									$('#email').focus();
+								});
+
+								var baseUrl =  "https://localhost:8443";
+								var hostURL = document.location.host;
+								if(hostURL.indexOf("localzoho.com") !== -1){
+									baseUrl = "https://invoice.localzoho.com";
+								} else if(hostURL.indexOf("zoho.com") !== -1){
+									baseUrl = "https://invoice.zoho.com";
+								}
+								InvoiceGenerator.baseUrl = baseUrl + "/api/v3/invoicegenerator";
+							});
+							if (edition === 'global') {
+								$.each(InvoiceGenerator.states, function(key, value) {
+									$('#companyStateSelect')
+									.append($("<option></option>")
+										.attr("value", value.state_name)
+										.text(value.state_name));
+									$('#customerStateSelect')
+									.append($("<option></option>")
+										.attr("value", value.state_name)
+										.text(value.state_name));
+									$('#placeOfSupplySelect')
+									.append($("<option></option>")
+										.attr("value", value.state_name)
+										.text(value.state_name));
+								});
+								CreateInvoiceUtil.calculateInvTaxAndTotal();
+							}
+							$('.faq-container h5').click(function () {
+								if ($(this).hasClass('active')) {
+									$(this).removeClass('active');
+								} else {
+									$('.faq-container h5').removeClass('active');
+									$(this).addClass('active');
+								}
+							});
+
+
+							function onSignupReady() {
+								$(document.body).css("visibility", "visible");
+								$.fn.zaSignUp.defaults.disableSubmit = function() {
+									return "Sign Up"; 
+								}
+								$.fn.zaSignUp.defaults.getConfirmationTemplate = function() {
+									return '';
+								}
+
+								$("#signupform").zaSignUp({
+									onsubmit: function() {
+										$("#za-signup-btn").attr("disabled", true);
+										$("#ZI-load").css("display","block");
+									},
+									oncomplete: function(state) {
+										var statusKey;
+										$.each($.fn.zaSignUp.SIGNUP_STATE, function(key, value) {
+											if (state === value) {
+												statusKey = key;
+												return false; 
+											}
+										});
+
+										dataLayer.push({
+											event: 'gaEvent',
+											gaCategory: 'invoice_conversion',
+											gaAction: 'signup',
+											gaLabel: 'STATE_' + statusKey
+										});
+
+										if (state == $.fn.zaSignUp.SIGNUP_STATE.ERROR) {
+											$("#za-signup-btn").attr("disabled", false); 
+											$("#ZI-load").css("display","none"); 
+										}
+										if (state == $.fn.zaSignUp.SIGNUP_STATE.ACCOUNT_CREATED) {
+
+											dataLayer.push({
+												event: 'gaEvent',
+												gaCategory: 'invoice_conversion_from_invgenerator',
+												gaAction: 'signup',
+												gaLabel: 'completed'
+											});
+										}
+									},
+									x_signup: {
+										password_required: true
+									}
+								});
+							}
+
+							window.trackSignUpClick = function() {
+								dataLayer.push({
+									event: 'gaEvent',
+									gaCategory: 'invoice_signup_fromgenerator',
+									gaAction: 'signup',
+									gaLabel: 'invoice_generator'
+								});
+							}
+
+						</script>
+
+					</body></html>
