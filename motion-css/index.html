@@ -1,0 +1,91 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="motion.css">
+		<style>
+			section {
+				padding: 300px 200px;
+
+			}
+			section:nth-child(even) {
+			  background: lightblue;
+			}
+				section:nth-child(odd) {
+			  background: #8ce2ea;
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<div>
+			<h1 class="wow-motion heading spin">
+				I'm here.
+			</h1>
+			</div>
+		
+			<h3 class="wow-motion float">this is lower text</h3>
+		</section>
+		<section>
+				<h1 class="wow-motion heartbeat">
+				I'm here.
+			</h1>
+		</section>
+		<section>
+				<h1 class="wow-motion">
+				I'm here.
+			</h1>
+		</section>
+		<section>
+				<h1 class="wow-motion">
+				I'm here.
+			</h1>
+		</section>
+		<section>
+				<h1 class="wow-motion">
+				I'm here.
+			</h1>
+		</section>
+		<section>
+				<h1 class="wow-motion turn-in-y">
+				I'm here.
+			</h1>
+		</section>
+		<section>
+			<h1 class="wow-motion fade-in-up">
+				I'm here.
+			</h1>
+			<h1 class="wow-motion fade-in-up" data-wow-delay=".2s">
+				I'm here.
+			</h1>
+			<h1 class="wow-motion fade-in-up" data-wow-delay=".4s">
+				I'm here.
+			</h1>
+		</section>
+		<section class="wow" data-wow-delay=".6s">
+			<h1 >
+				I'm here.
+			</h1>
+		</section>
+		<script
+     src="https://code.jquery.com/jquery-3.2.1.min.js"
+     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+     crossorigin="anonymous">
+       
+     </script>
+		<script src="js/wow.min.js"></script>
+		<script>
+					wow2 = new WOW(
+		                {
+		                boxClass: 'wow-motion',  
+		                animateClass: 'animation',
+		                offset:       0,  
+		                mobile:       true,   
+		                live:         true 
+		              }
+		              )
+		              wow2.init();
+
+          		new WOW().init();
+
+		</script>
+	</body>
+</html>

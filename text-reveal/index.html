@@ -1,0 +1,85 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="main.css">
+		<style>
+			section {
+				padding: 300px 200px;
+
+			}
+			section:nth-child(even) {
+			  background: lightblue;
+			}
+				section:nth-child(odd) {
+			  background: #8ce2ea;
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<div>
+			<h1 class="wow-reveal heading">
+				I'm here.
+			</h1>
+			</div>
+		
+			<h3 class="wow-reveal delay">this is lower text</h3>
+		</section>
+		<section>
+				<h1 class="wow-reveal">
+				I'm here.
+			</h1>
+		</section>
+		<section>
+				<h1 class="wow-reveal">
+				I'm here.
+			</h1>
+		</section>
+		<section>
+				<h1 class="wow-reveal">
+				I'm here.
+			</h1>
+		</section>
+		<section>
+				<h1 class="wow-reveal">
+				I'm here.
+			</h1>
+		</section>
+		<section>
+				<h1 class="wow-reveal">
+				I'm here.
+			</h1>
+		</section>
+		<section>
+			<h1 class="wow-reveal">
+				I'm here.
+			</h1>
+		</section>
+		<section class="wow">
+			<h1 >
+				I'm here.
+			</h1>
+		</section>
+		<script
+     src="https://code.jquery.com/jquery-3.2.1.min.js"
+     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+     crossorigin="anonymous">
+       
+     </script>
+		<script src="js/wow.min.js"></script>
+		<script>
+					wow2 = new WOW(
+		                {
+		                boxClass:     'wow-reveal',      // default
+		                animateClass: 'reveal-text', // default
+		                offset:       0,          // default
+		                mobile:       true,       // default
+		                live:         true        // default
+		              }
+		              )
+		              wow2.init();
+
+          		new WOW().init();
+
+		</script>
+	</body>
+</html>
