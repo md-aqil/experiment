@@ -1606,4 +1606,6 @@
 			$.error( 'Method ' +  method + ' does not exist on jQuery.Editor' );
 		}    
 	}; 
+
+	
 })( jQuery );
