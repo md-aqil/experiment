@@ -1,0 +1,110 @@
+<!--
+/*
+ * jQuery HTML SVG connect Plugin Demo
+ * https://github.com/a115/HTML-SVG-connect
+ *
+ * Licensed under the MIT license:
+ * http://www.opensource.org/licenses/MIT
+ */
+-->
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="jquery.html-svg-connect.js"></script>
+
+
+ 
+  <style>
+    #svgContainer {
+      z-index: -10;
+      position: absolute;
+border: 1px solid #ddd;
+    }
+    
+   
+  
+    #teal {
+      width: 6em;
+      height: 6em;
+      background-color: teal;
+      margin-left: 10%;
+    }
+    #orange {
+      height: 4em;
+      width: 35%;
+      padding: 2em 8em;
+      margin-left: 15em;
+      margin-top: 6em;
+      background-color: orange;
+    }
+    #red {
+      width: 6em;
+      height: 4em;
+      margin-left: 40%;
+      padding: 4em 3em;
+      background-color: red;
+    }
+    #aqua {
+      width: 5em;
+      height: 5em;
+      margin-left: 10%;
+      background-color: aqua;
+    }
+    #purple {
+      width: 9em;
+      height: 5em;
+      background-color: purple;
+    }
+    #green {
+      width: 5em;
+      height: 7em;
+      margin-top: 2em;
+      margin-left: 50%;
+      background-color: green;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="svgContainer"></div>
+
+  <div id="aqua"></div>
+  <div id="red"></div>
+  <div id="green"></div>
+  <div id="purple"></div>
+
+
+  <script type="text/javascript">
+
+    jQuery(document).ready(function($) {
+      $("#svgContainer").HTMLSVGconnect({
+        stroke: "#ddd",
+        strokeWidth: 1,
+        orientation: "auto",
+
+
+
+        paths: [
+          { start: "#red", end: "#green" },
+
+
+
+          { start: "#purple", end: "#green" }
+        ]
+
+
+      });
+    });
+
+  </script>
+
+
+</body>
+</html>

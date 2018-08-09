@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Swiper demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="../dist/css/swiper.min.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap-grid.css"> -->
+
+  <!-- Demo styles -->
+  <style>
+    html, body {
+      position: relative;
+      height: 100%;
+    }
+ .parallax-bg {
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 130%;
+   height: 100%;
+   -webkit-background-size: cover;
+   background-size: cover;
+   background-position: center;
+
+ }
+    .swiper-container {
+      width: 100%;
+      max-width: 100%;
+      margin: auto;
+      height: 100%;
+    }
+   .swiper-slide {
+    background: red;
+    width: 1000px;
+    height: 500px;
+   }
+   .Pimg {
+    position: relative;
+        right: -150px;
+        width: 650px;
+   }
+   .Prow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+   }
+   .Pitem {
+
+   }
+   .Ptext {
+    position: relative;
+        left: -100px;
+   }
+  </style>
+</head>
+<body>
+  <!-- Swiper -->
+  <div class="swiper-container">
+    <div class="parallax-bg" style="" data-swiper-parallax="-23%"></div>
+    <div class="swiper-wrapper">
+
+      <div class="swiper-slide">
+        <div class="Prow" data-swiper-parallax="-100">
+            <div class="Pitem">
+              <h1 class="Ptext" data-swiper-parallax="-300" data-swiper-parallax-opacity="0">
+               
+                Find Products to Sell
+                Online without Purchasing in Advance
+              </h1>
+            </div>
+            <div class="Pitem">
+             <img src="../dist/img/tdm-mockup-intro.png" class="Pimg" alt="" data-swiper-parallax="-500">
+            </div>
+           
+          </div>
+      </div>
+       <div class="swiper-slide">
+        <div class="Prow" data-swiper-parallax="-100">
+            <div class="Pitem">
+              <h1 class="Ptext" data-swiper-parallax="-300">
+               
+                Find Products to Sell
+                Online without Purchasing in Advance
+              </h1>
+            </div>
+            <div class="Pitem">
+             <img src="../dist/img/tdm-mockup-intro.png" class="Pimg" alt="" data-swiper-parallax="-500">
+            </div>
+           
+          </div>
+      </div>
+     
+    </div>
+    <!-- Add Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="../dist/js/swiper.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      slidesPerView: 'auto',
+      centeredSlides: true,
+      spaceBetween: 300,
+      speed: 600,
+      parallax: true,
+       grabCursor: true,
+          mousewheel: true,
+
+       loop: true,
+        keyboard: {
+        enabled: true,
+      },
+
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+
+  </script>
+</body>
+</html>
