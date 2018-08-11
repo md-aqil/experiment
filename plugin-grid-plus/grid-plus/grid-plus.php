@@ -52,8 +52,12 @@ if (!class_exists('Grid_Plus')) {
             if (isset($screen->base)) {
                 //setting grid
                 $min = (defined('GRID_PLUS_DEBUG') && GRID_PLUS_DEBUG) ? '' : '.min';
+
                 if ($screen->base === 'grid-plus_page_grid_plus_setting') {
+
+
                     wp_enqueue_style('font-awesome', G5PLUS_GRID_URL . 'assets/lib/font-awesome/css/font-awesome.min.css');
+
 
                     wp_enqueue_style('animate', G5PLUS_GRID_URL . 'assets/lib/animate/animate.css');
 
@@ -71,15 +75,25 @@ if (!class_exists('Grid_Plus')) {
 
                     wp_enqueue_style('grid-plus-stack', G5PLUS_GRID_URL . 'assets/lib/grid-stack/gridstack.min.css');
                     wp_enqueue_style('grid-plus-stack-extra', G5PLUS_GRID_URL . 'assets/lib/grid-stack/gridstack-extra.min.css');
+
                     wp_enqueue_script('jquery-ui', G5PLUS_GRID_URL . 'assets/lib/grid-stack/jquery-ui.js', false, true);
+
                     wp_enqueue_script('lodash', G5PLUS_GRID_URL . 'assets/lib/grid-stack/lodash.min.js', false, true);
                     wp_enqueue_script('grid-plus-stack', G5PLUS_GRID_URL . 'assets/lib/grid-stack/gridstack' . $min . '.js', false, true);
                     wp_enqueue_script('grid-plus-stack-jUI', G5PLUS_GRID_URL . 'assets/lib/grid-stack/gridstack.jQueryUI.min.js', false, true);
 
                     wp_enqueue_script('clipboard', G5PLUS_GRID_URL . 'assets/lib/clipboard/clipboard.min.js', array('wp-util'), true, true);
 
+
+
                     wp_enqueue_style('grid-plus-be-style', G5PLUS_GRID_URL . 'assets/css/be_style.css', array(), false);
+
+
+                 
+
+
                     wp_enqueue_script('grid-plus-utils', G5PLUS_GRID_URL . 'assets/js/backend/utils.min.js', array('wp-util'), true, true);
+
 
                     $grid_script_data = array(
                         'grid_id'  => isset($_GET['grid_id']) ? $_GET['grid_id'] : '',
@@ -100,8 +114,16 @@ if (!class_exists('Grid_Plus')) {
                     wp_enqueue_script('clipboard', G5PLUS_GRID_URL . 'assets/lib/clipboard/clipboard.min.js', array('wp-util'), true, true);
 
                     wp_enqueue_style('grid-plus-be-style', G5PLUS_GRID_URL . 'assets/css/be_style.css', array(), false);
+
+                       
+
                     wp_enqueue_script('grid-plus-utils', G5PLUS_GRID_URL . 'assets/js/backend/utils.min.js', array('wp-util'), true, true);
+
+
                     wp_enqueue_script('grid-plus-listing', G5PLUS_GRID_URL . 'assets/js/backend/listing.min.js', array('wp-util'), true, true);
+
+
+
                 }
             }
         }
@@ -207,6 +229,12 @@ if (!class_exists('Grid_Plus')) {
                     'name'    => 'custom design 01',
                     'slug'     => 'custom-01',
                     'template' => G5PLUS_GRID_DIR . 'skins/custom-01.php',
+                ),
+                
+                array(
+                    'name'    => 'custom design 02, only title',
+                    'slug'     => 'custom-02',
+                    'template' => G5PLUS_GRID_DIR . 'skins/custom-02.php',
                 )
 
 
@@ -243,13 +271,22 @@ if (!class_exists('Grid_Plus')) {
         function grid_plus_shortcode_register_css()
         {
             wp_register_style('font-awesome', G5PLUS_GRID_URL . 'assets/lib/font-awesome/css/font-awesome.min.css');
+
+
             wp_register_style('animate', G5PLUS_GRID_URL . 'assets/lib/animate/animate.css');
+
+
             wp_register_style('light-gallery', G5PLUS_GRID_URL . 'assets/lib/light-gallery/css/lightgallery.min.css', array());
             wp_register_style('ladda', G5PLUS_GRID_URL . 'assets/lib/ladda/ladda.min.css');
             wp_register_style('grid-plus-stack', G5PLUS_GRID_URL . 'assets/lib/grid-stack/gridstack.min.css');
             wp_register_style('grid-plus-stack-extra', G5PLUS_GRID_URL . 'assets/lib/grid-stack/gridstack-extra.min.css');
             wp_register_style('grid-owl-carousel', G5PLUS_GRID_URL . 'assets/lib/owl-carousel/grid.owl.carousel.min.css');
+
             wp_register_style('grid-plus-fe-style', G5PLUS_GRID_URL . 'assets/css/fe_style.css', array(), false);
+
+                wp_register_style('own-style', G5PLUS_GRID_URL . 'assets/css/own-style.css', array(), false);
+
+            
         }
 
         function grid_plus_shortcode_register_script()
@@ -263,9 +300,16 @@ if (!class_exists('Grid_Plus')) {
             wp_register_script('grid-plus-stack', G5PLUS_GRID_URL . 'assets/lib/grid-stack/gridstack' . $min . '.js', false, true);
             wp_register_script('grid-plus-stack-jUI', G5PLUS_GRID_URL . 'assets/lib/grid-stack/gridstack.jQueryUI.min.js', false, true);
             wp_register_script('grid-owl-carousel', G5PLUS_GRID_URL . 'assets/lib/owl-carousel/grid.owl.carousel.min.js', false, true);
+
+
             wp_register_script('match-media', G5PLUS_GRID_URL . 'assets/lib/matchmedia/matchmedia.js', false, true);
+
+
             wp_register_script('grid-plus-settings', G5PLUS_GRID_URL . 'assets/js/frontend/grid'. $min .'.js', array('wp-util', 'match-media'), true, true);
+
+               wp_register_script('own-script', G5PLUS_GRID_URL . 'assets/js/frontend/own-script.js', array('wp-util'), true, true);
         }
+
 
         function grid_plus_shortcode($atts)
         {
@@ -315,6 +359,7 @@ if (!class_exists('Grid_Plus')) {
             wp_enqueue_style('grid-plus-stack-extra');
             wp_enqueue_style('grid-owl-carousel');
             wp_enqueue_style('grid-plus-fe-style');
+            wp_enqueue_style('own-style');
 
             wp_enqueue_script('light-gallery');
             wp_enqueue_script('ladda-spin');
@@ -325,6 +370,9 @@ if (!class_exists('Grid_Plus')) {
             wp_enqueue_script('grid-plus-stack-jUI');
             wp_enqueue_script('grid-owl-carousel');
             wp_enqueue_script('match-media');
+
+            wp_enqueue_script('own-script');
+
             wp_enqueue_script('grid-plus-settings');
         }
 
