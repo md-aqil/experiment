@@ -1,0 +1,70 @@
+/* your styles go here */
+.Pitem img {
+	width: 100%;
+}
+
+.readmore {
+	overflow: hidden;
+}
+.Ptext {
+	font-weight: bold;
+}
+
+.hero {
+	margin-top: 50px;
+}
+.swiper-container {
+	padding-bottom: 50px;
+}
+.spacethis {
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+.spacehalf {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+.marq-wrap {
+	width: 400px;
+	    float: left;
+	    margin-left: 50px;
+	    margin-top: -19px;
+}
+
+ .swiper-loop .swiper-wrapper{
+      -webkit-transition-timing-function:linear!important;
+       -o-transition-timing-function:linear!important; 
+      transition-timing-function:linear!important;
+ } 
+
+.navbar {
+    background: #fff;
+    box-shadow: 0 0 3px #0000001a;
+}
+
+.readmore-link  {
+	    font-size: 18px;
+}
+
+.readmore-link:after {
+    content: "\f3d1";
+    font-family: "Ionicons";
+    position: relative;
+        top: 2px;
+    
+}
+
+.readmore ul {
+	list-style: none;
+	padding:0;
+}
+
+.features-item h3 a {
+	color: #333;
+	font-weight: bold;
+}
+
+.features-item p{
+	color: #6b6b6b;
+}
+
